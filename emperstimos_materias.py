@@ -1,73 +1,131 @@
 
-print("BEM-VINDO À LOJA DE EMPRÉSTIMOS BENTO")
+from datetime import datetime
+
+print("++++++++++++++++++++++++++++++++++++++")
+print("        BEM-VINDO À LOJA BENTOS")
+print("++++++++++++++++++++++++++++++++++++++")
 
 materiais = {
-    "1": {"nome": "Computador HP", "disponivel": True},
-    "2": {"nome": "Computador Dell", "disponivel": False},
-    "3": {"nome": "Computador Lenovo", "disponivel": True},
-    "4": {"nome": "Computador Dell Latitude", "disponivel": True},
-
-
+    1: {"nome": "Samsung", "disponivel": True},
+    2: {"nome": "Nokia", "disponivel": True},
+    3: {"nome": "iPhone", "disponivel": False},
+    4: {"nome": "iPad", "disponivel": False}
 }
 
-registos = []
+emprestimos = []
 
 nome_usuario = ""
 nome_fornecedor = ""
 
 while True:
 
-    print("\nMateriais disponíveis:")
+    print("\n++++++++++ MATERIAIS ++++++++++")
 
     for codigo, material in materiais.items():
-        print(codigo, "-", material["nome"])
+
+        if material["disponivel"]:
+            estado = "Disponível"
+        else:
+            estado = "Indisponível"
+
+        print(codigo, "-", material["nome"], "-", estado)
 
     codigo = input("\nDigite o código do material: ")
 
-    if codigo not in materiais:
-        print("Código não encontrado!")
+    if not codigo.isdigit():
 
-    elif not materiais[codigo]["disponivel"]:
-        print("Material não disponível!")
+        print("Código inválido!")
+
+    elif int(codigo) not in materiais:
+
+        print("Material não encontrado!")
 
     else:
-        print("Material disponível!")
 
-        if nome_usuario == "":
-            nome_usuario = input("Nome do utilizador: ")
-            nome_fornecedor = input("Nome do fornecedor: ")
+        codigo = int(codigo)
+        material = materiais[codigo]
 
-        data_entrega = input("Data de entrega : ")
-        data_devolucao = input("Data de devolução : ")
+        if not material["disponivel"]:
 
-        registo = {
-            "utilizador": nome_usuario,
-            "fornecedor": nome_fornecedor,
-            "material": materiais[codigo]["nome"],
-            "codigo": codigo,
-            "entrega": data_entrega,
-            "devolucao": data_devolucao
-        }
+            print("\nMATERIAL NÃO DISPONÍVEL!")
 
-        registos.append(registo)
+        else:
 
-        materiais[codigo]["disponivel"] = False
+            print("\nMATERIAL DISPONÍVEL!")
 
-        print("Empréstimo registado com sucesso!")
+            if nome_usuario == "":
 
-    continuar = input("\nDeseja emprestar outro material ? (sim/não): ").lower()
+                nome_usuario = input("Nome do utilizador: ")
+                nome_fornecedor = input("Nome do fornecedor: ")
 
-    if continuar != "sim":
+            try:
+
+                data_entrega = datetime.strptime(
+                    input("Data da entrega (LL/MM/BBBB): "),
+                    "%d/%m/%Y"
+                )
+
+                data_devolucao = datetime.strptime(
+                    input("Data prevista da devolução (LL/MM/MMMM): "),
+                    "%d/%m/%Y"
+                )
+
+                if data_devolucao < data_entrega:
+
+                    print("A data de devolução não pode ser anterior à entrega!")
+
+                else:
+
+                    registo = {
+                        "utilizador": nome_usuario,
+                        "fornecedor": nome_fornecedor,
+                        "codigo": codigo,
+                        "material": material["nome"],
+                        "data_entrega": data_entrega,
+                        "data_devolucao": data_devolucao
+                    }
+
+                    emprestimos.append(registo)
+
+                    material["disponivel"] = False
+
+                    print("\nEMPRÉSTIMO REGISTADO COM SUCESSO!")
+                    print("Material:", material["nome"])
+                    print("Código:", codigo)
+                    print("Utilizador:", nome_usuario)
+                    print("Fornecedor:", nome_fornecedor)
+
+            except ValueError:
+
+                print("Data inválida! Utilize ll/MM/BBBB.")
+
+    continuar = input(
+        "\nDeseja emprestar mais algum material? (s/n): "
+    ).lower()
+
+    if continuar != "s":
         break
 
-print("\nREGISTOS DE EMPRÉSTIMOS")
 
-for registo in registos:
-    print("\nUtilizador:", registo["utilizador"])
-    print("Fornecedor:", registo["fornecedor"])
-    print("Material:", registo["material"])
-    print("Código:", registo["codigo"])
-    print("Entrega:", registo["entrega"])
-    print("Devolução:", registo["devolucao"])
+print("\n++++++++++++++++++++++++++++++++++++")
+print("          RESUMO DOS EMPRÉSTIMOS")
+print("++++++++++++++++++++++++++++++++++++++")
 
-print("\nFim")
+if len(emprestimos) == 0:
+
+    print("Nenhum empréstimo foi realizado.")
+
+else:
+
+    for registo in emprestimos:
+
+        print("\nMaterial:", registo["material"])
+        print("Código:", registo["codigo"])
+        print("Utilizador:", registo["utilizador"])
+        print("Fornecedor:", registo["fornecedor"])
+        print("Data da entrega:", registo["data_entrega"].strftime("%d/%m/%Y"))
+        print("Data da devolução:", registo["data_devolucao"].strftime("%d/%m/%Y"))
+
+print("\n++++++++++++++++++++++++++++++++++++")
+print("               FIM !     ")
+print("++++++++++++++++++++++++++++++++++++++")
