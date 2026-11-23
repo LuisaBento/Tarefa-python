@@ -1,4 +1,6 @@
-print("===== SISTEMA DE CONSULTA DE EQUIPAMENTOS =====")
+print("++++++++++++++++++++++++++++++++++++++")
+print("       BEM-VINDO À LOJA BENTOS")
+print("++++++++++++++++++++++++++++++++++++++")
 
 equipamentos = {
     1: {
