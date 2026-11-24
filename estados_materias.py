@@ -22,8 +22,8 @@ equipamentos = {
     }
 }
 
-while True:
 
+def mostrar_equipamentos():
     print("\nLISTA DE EQUIPAMENTOS")
     print("----------------------------------------")
     print("CÓDIGO | EQUIPAMENTO")
@@ -33,6 +33,23 @@ while True:
         print(codigo, "|", equipamento["nome"])
 
     print("----------------------------------------")
+
+
+def consultar_estado(codigo):
+    equipamento = equipamentos[codigo]
+
+    print("\n++++++++++ ESTADO DO EQUIPAMENTO ++++++++++")
+    print("Equipamento:", equipamento["nome"])
+
+    if equipamento["disponivel"]:
+        print("Estado: Disponível")
+    else:
+        print("Estado: Não disponível")
+
+
+while True:
+
+    mostrar_equipamentos()
 
     codigo = input("\nDeseja ver o estado de qual equipamento? ")
 
@@ -44,16 +61,7 @@ while True:
 
     else:
         codigo = int(codigo)
-
-        equipamento = equipamentos[codigo]
-
-        print("\n++++++++++ ESTADO DO EQUIPAMENTO ++++++++++")
-        print("Equipamento:", equipamento["nome"])
-
-        if equipamento["disponivel"]:
-            print("Estado: Disponível")
-        else:
-            print("Estado: Não disponível")
+        consultar_estado(codigo)
 
     nova_consulta = input(
         "\nDeseja fazer uma nova consulta? (S/N): "

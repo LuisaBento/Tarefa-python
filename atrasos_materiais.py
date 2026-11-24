@@ -1,10 +1,6 @@
 
 from datetime import datetime
 
-print("++++++++++++++++++++++++++++++++++++++")
-print("       BEM-VINDO À LOJA BENTOS")
-print("++++++++++++++++++++++++++++++++++++++")
-
 materiais = {
     1: {"nome": "Samsung", "disponivel": True},
     2: {"nome": "Nokia", "disponivel": False},
@@ -29,62 +25,75 @@ emprestimos = [
     }
 ]
 
-while True:
 
+def mostrar_materiais():
     print("\n++++++++++ MATERIAIS CADASTRADOS ++++++++++")
 
     for codigo, material in materiais.items():
         print(codigo, "-", material["nome"])
 
-    codigo = input("\nDigite o código do material: ")
 
-    if not codigo.isdigit():
-        print("\nCódigo inválido!")
+def verificar_atraso(data):
+    hoje = datetime.today()
+    data_devolucao = datetime.strptime(data, "%d/%m/%Y")
 
-    elif int(codigo) not in materiais:
-        print("\nMaterial não encontrado!")
+    if hoje.date() > data_devolucao.date():
+        print("\nEQUIPAMENTO EM ATRASO!")
+    else:
+        print("\nAGUARDANDO A DATA DE DEVOLUÇÃO.")
+
+
+def consultar_material(codigo):
+    material = materiais[codigo]
+
+    if material["disponivel"]:
+        print("\nEQUIPAMENTO EM STOCK!")
 
     else:
-        codigo = int(codigo)
-        material = materiais[codigo]
+        for emprestimo in emprestimos:
 
-        if material["disponivel"]:
-            print("\nEQUIPAMENTO EM STOCK!")
+            if emprestimo["codigo"] == codigo:
+
+                print("\n++++++++++ DADOS DO EMPRÉSTIMO ++++++++++")
+                print("Material:", material["nome"])
+                print("Utilizador:", emprestimo["utilizador"])
+                print("Fornecedor:", emprestimo["fornecedor"])
+                print("Data de entrega:", emprestimo["data_entrega"])
+                print("Data prevista de devolução:", emprestimo["data_devolucao"])
+
+                verificar_atraso(emprestimo["data_devolucao"])
+                return
+
+        print("\nNão existem registos de empréstimo para este material.")
+
+
+def main():
+    print("++++++++++++++++++++++++++++++++++++++")
+    print("       BEM-VINDO À LOJA BENTOS")
+    print("++++++++++++++++++++++++++++++++++++++")
+
+    while True:
+        mostrar_materiais()
+
+        codigo = input("\nDigite o código do material: ")
+
+        if not codigo.isdigit():
+            print("\nCódigo inválido!")
+
+        elif int(codigo) not in materiais:
+            print("\nMaterial não encontrado!")
 
         else:
-            for emprestimo in emprestimos:
+            consultar_material(int(codigo))
 
-                if emprestimo["codigo"] == codigo:
+        continuar = input("\nDeseja consultar outro material? (s/n): ").lower()
 
-                    print("\n++++++++++ DADOS DO EMPRÉSTIMO ++++++++++")
-                    print("Material:", material["nome"])
-                    print("Utilizador:", emprestimo["utilizador"])
-                    print("Fornecedor:", emprestimo["fornecedor"])
-                    print("Data de entrega:", emprestimo["data_entrega"])
-                    print("Data prevista de devolução:", emprestimo["data_devolucao"])
+        if continuar != "s":
+            break
 
-                    hoje = datetime.today()
-                    data_devolucao = datetime.strptime(
-                        emprestimo["data_devolucao"],
-                        "%d/%m/%Y"
-                    )
+    print("\n++++++++++++++++++++++++++++++++++++++")
+    print("             FIM DO PROCESSO")
+    print("++++++++++++++++++++++++++++++++++++++")
 
-                    if hoje.date() > data_devolucao.date():
-                        print("\nEQUIPAMENTO EM ATRASO!")
 
-                    else:
-                        print("\nAGUARDANDO A DATA DE DEVOLUÇÃO.")
-
-                    break
-
-            else:
-                print("\nNão existem registos de empréstimo para este material.")
-
-    continuar = input("\nDeseja consultar outro material? (s/n): ").lower()
-
-    if continuar != "s":
-        break
-
-print("\n++++++++++++++++++++++++++++++++++++++")
-print("             FIM DO PROCESSO")
-print("++++++++++++++++++++++++++++++++++++++")
+main()

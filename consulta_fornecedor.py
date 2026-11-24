@@ -17,6 +17,31 @@ emprestimos = [
     {"utilizador": "Pedro", "fornecedor": "Ruth", "material": "iPad"}
 ]
 
+
+def procurar_fornecedor(nome_fornecedor):
+    for nome in fornecedores.values():
+        if nome.lower() == nome_fornecedor.lower():
+            return nome
+
+    return ""
+
+
+def consultar_emprestimos(fornecedor_encontrado):
+    total = 0
+
+    print("\n++++++++++ CONSULTA DE FORNECEDOR ++++++++++")
+    print("Fornecedor:", fornecedor_encontrado)
+
+    for emprestimo in emprestimos:
+        if emprestimo["fornecedor"].lower() == fornecedor_encontrado.lower():
+            total += 1
+
+            print("\nMaterial:", emprestimo["material"])
+            print("Utilizador:", emprestimo["utilizador"])
+
+    print("\nTotal de empréstimos autorizados:", total)
+
+
 while True:
 
     print("\n++++++++++ FORNECEDORES CADASTRADOS ++++++++++")
@@ -28,31 +53,13 @@ while True:
         "\nDigite o nome do fornecedor que deseja consultar: "
     )
 
-    fornecedor_encontrado = ""
-
-    for nome in fornecedores.values():
-        if nome.lower() == nome_fornecedor.lower():
-            fornecedor_encontrado = nome
-            break
+    fornecedor_encontrado = procurar_fornecedor(nome_fornecedor)
 
     if fornecedor_encontrado == "":
         print("\nEste fornecedor não faz parte da equipa Bentos!")
 
     else:
-        total = 0
-
-        print("\n++++++++++ CONSULTA DE FORNECEDOR ++++++++++")
-        print("Fornecedor:", fornecedor_encontrado)
-
-        for emprestimo in emprestimos:
-
-            if emprestimo["fornecedor"].lower() == fornecedor_encontrado.lower():
-                total += 1
-
-                print("\nMaterial:", emprestimo["material"])
-                print("Utilizador:", emprestimo["utilizador"])
-
-        print("\nTotal de empréstimos autorizados:", total)
+        consultar_emprestimos(fornecedor_encontrado)
 
     continuar = input(
         "\nDeseja consultar outro fornecedor? (s/n): "

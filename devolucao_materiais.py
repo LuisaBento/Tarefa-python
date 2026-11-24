@@ -1,10 +1,6 @@
 
 from datetime import datetime
 
-print("++++++++++++++++++++++++++++++++++++++")
-print("       BEM-VINDO À LOJA BENTOS")
-print("++++++++++++++++++++++++++++++++++++++")
-
 materiais = {
     1: {"nome": "Samsung", "disponivel": True},
     2: {"nome": "Nokia", "disponivel": False},
@@ -29,6 +25,47 @@ emprestimos = [
     }
 ]
 
+
+def procurar_emprestimo(codigo):
+    for emprestimo in emprestimos:
+        if emprestimo["codigo"] == codigo and emprestimo["estado"] == "Emprestado":
+            return emprestimo
+
+    return None
+
+
+def registar_devolucao(emprestimo, material):
+    nome_entregador = input("\nNome de quem está a entregar o material: ")
+    fornecedor = input("Nome do fornecedor que recebeu o equipamento: ")
+
+    try:
+        data_devolucao = datetime.strptime(
+            input("Data da devolução (DD/MM/AAAA): "),
+            "%d/%m/%Y"
+        )
+
+        emprestimo["entregador"] = nome_entregador
+        emprestimo["fornecedor_recebeu"] = fornecedor
+        emprestimo["data_devolucao"] = data_devolucao
+        emprestimo["estado"] = "Devolvido"
+
+        material["disponivel"] = True
+
+        print("\nDEVOLUÇÃO REGISTADA COM SUCESSO!")
+        print("Material:", material["nome"])
+        print("Entregador:", nome_entregador)
+        print("Fornecedor que recebeu:", fornecedor)
+        print("Data da devolução:", data_devolucao.strftime("%d/%m/%Y"))
+        print("O MATERIAL ESTÁ AGORA DISPONÍVEL.")
+
+    except ValueError:
+        print("\nData inválida! Utilize DD/MM/AAAA.")
+
+
+print("++++++++++++++++++++++++++++++++++++++")
+print("       BEM-VINDO À LOJA BENTOS")
+print("++++++++++++++++++++++++++++++++++++++")
+
 while True:
 
     print("\n++++++++++ MATERIAIS DA LOJA ++++++++++")
@@ -52,43 +89,13 @@ while True:
             print("\nEste material não possui nenhum empréstimo ativo.")
 
         else:
-            emprestimo_encontrado = None
-
-            for emprestimo in emprestimos:
-                if emprestimo["codigo"] == codigo and emprestimo["estado"] == "Emprestado":
-                    emprestimo_encontrado = emprestimo
-                    break
+            emprestimo_encontrado = procurar_emprestimo(codigo)
 
             if emprestimo_encontrado is None:
                 print("\nRegisto de empréstimo não encontrado!")
 
             else:
-                nome_entregador = input("\nNome de quem está a entregar o material: ")
-
-                fornecedor = input("Nome do fornecedor que recebeu o equipamento: ")
-
-                try:
-                    data_devolucao = datetime.strptime(
-                        input("Data da devolução (DD/MM/AAAA): "),
-                        "%d/%m/%Y"
-                    )
-
-                    emprestimo_encontrado["entregador"] = nome_entregador
-                    emprestimo_encontrado["fornecedor_recebeu"] = fornecedor
-                    emprestimo_encontrado["data_devolucao"] = data_devolucao
-                    emprestimo_encontrado["estado"] = "Devolvido"
-
-                    material["disponivel"] = True
-
-                    print("\nDEVOLUÇÃO REGISTADA COM SUCESSO!")
-                    print("Material:", material["nome"])
-                    print("Entregador:", nome_entregador)
-                    print("Fornecedor que recebeu:", fornecedor)
-                    print("Data da devolução:", data_devolucao.strftime("%d/%m/%Y"))
-                    print("O MATERIAL ESTÁ AGORA DISPONÍVEL.")
-
-                except ValueError:
-                    print("\nData inválida! Utilize DD/MM/AAAA.")
+                registar_devolucao(emprestimo_encontrado, material)
 
     continuar = input("\nDeseja entregar outro material? (s/n): ").lower()
 
