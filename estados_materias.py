@@ -5,8 +5,6 @@ equipamentos = {
     3: {"nome": "iPhone", "disponivel": True},
     4: {"nome": "iPad", "disponivel": False}
 }
-
-
 def mostrar_equipamentos():
     print("\nLISTA DE EQUIPAMENTOS")
     print("----------------------------------------")
@@ -17,19 +15,6 @@ def mostrar_equipamentos():
         print(codigo, "|", equipamento["nome"])
 
     print("----------------------------------------")
-
-
-def consultar_estado(codigo):
-    equipamento = equipamentos[codigo]
-
-    print("\n++++++++++ ESTADO DO EQUIPAMENTO ++++++++++")
-    print("Equipamento:", equipamento["nome"])
-
-    if equipamento["disponivel"]:
-        print("Estado: Disponível")
-    else:
-        print("Estado: Não disponível")
-
 
 def estados():
 
@@ -62,7 +47,23 @@ def estados():
             break
 
 
-    print("\n++++++++++++++++++++++++++++++++++++++")
+
+def consultar_estado(codigo):
+    equipamento = equipamentos[codigo]
+
+    print("\n++++++++++ ESTADO DO EQUIPAMENTO ++++++++++")
+    print("Equipamento:", equipamento["nome"])
+
+    if equipamento["disponivel"]:
+        print("Estado: Disponível")
+    else:
+        print("Estado: Não disponível")
+
+
+
+
+
+    print("\n...................................")
     print("             FIM DO PROCESSO")
     print("++++++++++++++++++++++++++++++++++++++")
 

@@ -1,6 +1,6 @@
 
-from emprestimos_materiais import emprestimos
 from estados_materias import estados
+from emprestimos_materiais import emprestimos
 from consulta_fornecedor import fornecedores_consulta
 from atrasos_materiais import atrasos
 from devolucao_materiais import devolucoes
@@ -8,15 +8,15 @@ from devolucao_materiais import devolucoes
 
 def programa_principal():
 
-    print("++++++++++++++++++++++++++++++++++++++")
+    print(".......................................")
     print("        BEM-VINDO À LOJA BENTOS")
-    print("++++++++++++++++++++++++++++++++++++++")
+    print("........................................")
 
     while True:
 
-        print("\n++++++++++++ MENU PRINCIPAL ++++++++++++")
-        print("1 - Registar empréstimo")
-        print("2 - Consultar estado dos materiais")
+        print("\n.........MENU PRINCIPAL ..........")
+        print("1 - consultar estado dos materiais ")
+        print("2 - Registar empréstimo")
         print("3 - Consultar fornecedores")
         print("4 - Consultar atrasos")
         print("5 - Registar devolução")
@@ -25,10 +25,10 @@ def programa_principal():
         opcao = input("\nEscolha uma opção: ")
 
         if opcao == "1":
-            emprestimos()
+            estados()
 
         elif opcao == "2":
-            estados()
+          emprestimos()
 
         elif opcao == "3":
             fornecedores_consulta()

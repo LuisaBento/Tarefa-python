@@ -27,6 +27,48 @@ emprestimos = [
 ]
 
 
+
+def devolucoes():
+
+    print("......................................")
+    print("       BEM-VINDO À LOJA BENTOS")
+    print("......................................")
+
+    while True:
+
+        print("\n....... MATERIAIS DA LOJA ........")
+
+        for codigo, material in materiais.items():
+            print(codigo, "-", material["nome"])
+
+        codigo = input("\nDigite o código do material a devolver: ")
+
+        if not codigo.isdigit():
+            print("\nCódigo inválido!")
+
+        elif int(codigo) not in materiais:
+            print("\nO MATERIAL NÃO PERTENCE A ESTA EMPRESA.")
+
+        else:
+            codigo = int(codigo)
+            material = materiais[codigo]
+
+            if material["disponivel"]:
+                print("\nEste material não possui nenhum empréstimo ativo.")
+
+            else:
+                emprestimo_encontrado = procurar_emprestimo(codigo)
+
+                if emprestimo_encontrado is None:
+                    print("\nRegisto de empréstimo não encontrado!")
+
+                else:
+                    registar_devolucao(emprestimo_encontrado, material)
+
+        continuar = input("\nDeseja entregar outro material? (s/n): ").lower()
+
+        if continuar != "s":
+            break
 def procurar_emprestimo(codigo):
     for emprestimo in emprestimos:
         if emprestimo["codigo"] == codigo and emprestimo["estado"] == "Emprestado":
@@ -63,48 +105,7 @@ def registar_devolucao(emprestimo, material):
         print("\nData inválida! Utilize DD/MM/AAAA.")
 
 
-def devolucoes():
 
-    print("++++++++++++++++++++++++++++++++++++++")
-    print("       BEM-VINDO À LOJA BENTOS")
-    print("++++++++++++++++++++++++++++++++++++++")
-
-    while True:
-
-        print("\n++++++++++ MATERIAIS DA LOJA ++++++++++")
-
-        for codigo, material in materiais.items():
-            print(codigo, "-", material["nome"])
-
-        codigo = input("\nDigite o código do material a devolver: ")
-
-        if not codigo.isdigit():
-            print("\nCódigo inválido!")
-
-        elif int(codigo) not in materiais:
-            print("\nO MATERIAL NÃO PERTENCE A ESTA EMPRESA.")
-
-        else:
-            codigo = int(codigo)
-            material = materiais[codigo]
-
-            if material["disponivel"]:
-                print("\nEste material não possui nenhum empréstimo ativo.")
-
-            else:
-                emprestimo_encontrado = procurar_emprestimo(codigo)
-
-                if emprestimo_encontrado is None:
-                    print("\nRegisto de empréstimo não encontrado!")
-
-                else:
-                    registar_devolucao(emprestimo_encontrado, material)
-
-        continuar = input("\nDeseja entregar outro material? (s/n): ").lower()
-
-        if continuar != "s":
-            break
-
-    print("\n++++++++++++++++++++++++++++++++++++++")
+    print("\n..................................")
     print("             FIM DO PROCESSO")
-    print("++++++++++++++++++++++++++++++++++++++")
+    print("....................................")

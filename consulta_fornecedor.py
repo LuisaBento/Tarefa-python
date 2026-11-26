@@ -25,7 +25,7 @@ def procurar_fornecedor(nome_fornecedor):
 def consultar_emprestimos(fornecedor_encontrado):
     total = 0
 
-    print("\n++++++++++ CONSULTA DE FORNECEDOR ++++++++++")
+    print("\n.......CONSULTA DE FORNECEDOR .........")
     print("Fornecedor:", fornecedor_encontrado)
 
     for emprestimo in emprestimos:
@@ -40,7 +40,7 @@ def consultar_emprestimos(fornecedor_encontrado):
 
 def fornecedores_consulta():
 
-    print("++++++++++++++++++++++++++++++++++++++")
+    print("....................................")
     print("       BEM-VINDO À LOJA BENTOS")
     print("++++++++++++++++++++++++++++++++++++++")
 
@@ -70,6 +70,6 @@ def fornecedores_consulta():
         if continuar != "s":
             break
 
-    print("\n++++++++++++++++++++++++++++++++++++++")
+    print("\n....................................")
     print("             FIM DO PROCESSO")
-    print("++++++++++++++++++++++++++++++++++++++")
+    print(".....................................")

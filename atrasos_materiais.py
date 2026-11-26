@@ -28,7 +28,7 @@ emprestimos = [
 
 
 def mostrar_materiais():
-    print("\n++++++++++ MATERIAIS CADASTRADOS ++++++++++")
+    print("\n........ MATERIAIS CADASTRADOS ............")
 
     for codigo, material in materiais.items():
         print(codigo, "-", material["nome"])
@@ -55,7 +55,7 @@ def consultar_material(codigo):
 
             if emprestimo["codigo"] == codigo:
 
-                print("\n++++++++++ DADOS DO EMPRÉSTIMO ++++++++++")
+                print("\n.......... DADOS DO EMPRÉSTIMO ..........")
                 print("Material:", material["nome"])
                 print("Utilizador:", emprestimo["utilizador"])
                 print("Fornecedor:", emprestimo["fornecedor"])
@@ -69,9 +69,9 @@ def consultar_material(codigo):
 
 
 def atrasos():
-    print("++++++++++++++++++++++++++++++++++++++")
+    print(".....................................")
     print("       BEM-VINDO À LOJA BENTOS")
-    print("++++++++++++++++++++++++++++++++++++++")
+    print(".....................................")
 
     while True:
         mostrar_materiais()
@@ -92,6 +92,6 @@ def atrasos():
         if continuar != "s":
             break
 
-    print("\n++++++++++++++++++++++++++++++++++++++")
+    print("\n...................................")
     print("             FIM DO PROCESSO")
-    print("++++++++++++++++++++++++++++++++++++++")
+    print(".....................................")

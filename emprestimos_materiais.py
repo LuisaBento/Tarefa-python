@@ -14,6 +14,52 @@ registos_emprestimos = []
 nome_usuario = ""
 nome_fornecedor = ""
 
+def emprestimos():
+    global nome_usuario, nome_fornecedor
+
+    print("....................................")
+    print("        BEM-VINDO À LOJA BENTOS")
+    print("....................................")
+
+    while True:
+
+        print("\n........ MATERIAIS .........")
+
+        for codigo, material in materiais.items():
+            print(codigo, "-", material["nome"])
+
+        codigo = input("\nDigite o código do material: ")
+
+        if not codigo.isdigit():
+            print("Código inválido!")
+
+        elif int(codigo) not in materiais:
+            print("Material não encontrado!")
+
+        else:
+            codigo = int(codigo)
+            material = materiais[codigo]
+
+            if not material["disponivel"]:
+                print("\nMATERIAL NÃO DISPONÍVEL!")
+
+            else:
+                print("\nMATERIAL DISPONÍVEL!")
+
+                if nome_usuario == "":
+                    nome_usuario = input("Nome do utilizador: ")
+                    nome_fornecedor = input("Nome do fornecedor: ")
+
+                registar_emprestimo(codigo, material)
+
+        continuar = input(
+            "\nDeseja emprestar mais algum material? (s/n): "
+        ).lower()
+
+        if continuar != "s":
+            break
+
+    mostrar_resumo()
 
 def registar_emprestimo(codigo, material):
     global nome_usuario, nome_fornecedor
@@ -58,9 +104,9 @@ def registar_emprestimo(codigo, material):
 
 
 def mostrar_resumo():
-    print("\n++++++++++++++++++++++++++++++++++++")
+    print("\n...................................")
     print("          RESUMO DOS EMPRÉSTIMOS")
-    print("++++++++++++++++++++++++++++++++++++++")
+    print(".....................................")
 
     if len(registos_emprestimos) == 0:
         print("Nenhum empréstimo foi realizado.")
@@ -75,56 +121,10 @@ def mostrar_resumo():
             print("Data da devolução:", registo["data_devolucao"].strftime("%d/%m/%Y"))
 
 
-def emprestimos():
-    global nome_usuario, nome_fornecedor
 
-    print("++++++++++++++++++++++++++++++++++++++")
-    print("        BEM-VINDO À LOJA BENTOS")
-    print("++++++++++++++++++++++++++++++++++++++")
-
-    while True:
-
-        print("\n++++++++++ MATERIAIS ++++++++++")
-
-        for codigo, material in materiais.items():
-            print(codigo, "-", material["nome"])
-
-        codigo = input("\nDigite o código do material: ")
-
-        if not codigo.isdigit():
-            print("Código inválido!")
-
-        elif int(codigo) not in materiais:
-            print("Material não encontrado!")
-
-        else:
-            codigo = int(codigo)
-            material = materiais[codigo]
-
-            if not material["disponivel"]:
-                print("\nMATERIAL NÃO DISPONÍVEL!")
-
-            else:
-                print("\nMATERIAL DISPONÍVEL!")
-
-                if nome_usuario == "":
-                    nome_usuario = input("Nome do utilizador: ")
-                    nome_fornecedor = input("Nome do fornecedor: ")
-
-                registar_emprestimo(codigo, material)
-
-        continuar = input(
-            "\nDeseja emprestar mais algum material? (s/n): "
-        ).lower()
-
-        if continuar != "s":
-            break
-
-    mostrar_resumo()
-
-    print("\n++++++++++++++++++++++++++++++++++++")
+    print("\n...................................")
     print("               FIM !")
-    print("++++++++++++++++++++++++++++++++++++++")
+    print(".....................................")
 
 
 if __name__ == "__main__":
