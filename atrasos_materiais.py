@@ -1,6 +1,7 @@
 
 from datetime import datetime
 
+
 materiais = {
     1: {"nome": "Samsung", "disponivel": True},
     2: {"nome": "Nokia", "disponivel": False},
@@ -67,7 +68,7 @@ def consultar_material(codigo):
         print("\nNão existem registos de empréstimo para este material.")
 
 
-def main():
+def atrasos():
     print("++++++++++++++++++++++++++++++++++++++")
     print("       BEM-VINDO À LOJA BENTOS")
     print("++++++++++++++++++++++++++++++++++++++")
@@ -94,6 +95,3 @@ def main():
     print("\n++++++++++++++++++++++++++++++++++++++")
     print("             FIM DO PROCESSO")
     print("++++++++++++++++++++++++++++++++++++++")
-
-
-main()

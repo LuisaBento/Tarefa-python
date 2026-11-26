@@ -1,6 +1,7 @@
 
 from datetime import datetime
 
+
 materiais = {
     1: {"nome": "Samsung", "disponivel": True},
     2: {"nome": "Nokia", "disponivel": False},
@@ -62,46 +63,48 @@ def registar_devolucao(emprestimo, material):
         print("\nData inválida! Utilize DD/MM/AAAA.")
 
 
-print("++++++++++++++++++++++++++++++++++++++")
-print("       BEM-VINDO À LOJA BENTOS")
-print("++++++++++++++++++++++++++++++++++++++")
+def devolucoes():
 
-while True:
+    print("++++++++++++++++++++++++++++++++++++++")
+    print("       BEM-VINDO À LOJA BENTOS")
+    print("++++++++++++++++++++++++++++++++++++++")
 
-    print("\n++++++++++ MATERIAIS DA LOJA ++++++++++")
+    while True:
 
-    for codigo, material in materiais.items():
-        print(codigo, "-", material["nome"])
+        print("\n++++++++++ MATERIAIS DA LOJA ++++++++++")
 
-    codigo = input("\nDigite o código do material a devolver: ")
+        for codigo, material in materiais.items():
+            print(codigo, "-", material["nome"])
 
-    if not codigo.isdigit():
-        print("\nCódigo inválido!")
+        codigo = input("\nDigite o código do material a devolver: ")
 
-    elif int(codigo) not in materiais:
-        print("\nO MATERIAL NÃO PERTENCE A ESTA EMPRESA.")
+        if not codigo.isdigit():
+            print("\nCódigo inválido!")
 
-    else:
-        codigo = int(codigo)
-        material = materiais[codigo]
-
-        if material["disponivel"]:
-            print("\nEste material não possui nenhum empréstimo ativo.")
+        elif int(codigo) not in materiais:
+            print("\nO MATERIAL NÃO PERTENCE A ESTA EMPRESA.")
 
         else:
-            emprestimo_encontrado = procurar_emprestimo(codigo)
+            codigo = int(codigo)
+            material = materiais[codigo]
 
-            if emprestimo_encontrado is None:
-                print("\nRegisto de empréstimo não encontrado!")
+            if material["disponivel"]:
+                print("\nEste material não possui nenhum empréstimo ativo.")
 
             else:
-                registar_devolucao(emprestimo_encontrado, material)
+                emprestimo_encontrado = procurar_emprestimo(codigo)
 
-    continuar = input("\nDeseja entregar outro material? (s/n): ").lower()
+                if emprestimo_encontrado is None:
+                    print("\nRegisto de empréstimo não encontrado!")
 
-    if continuar != "s":
-        break
+                else:
+                    registar_devolucao(emprestimo_encontrado, material)
 
-print("\n++++++++++++++++++++++++++++++++++++++")
-print("             FIM DO PROCESSO")
-print("++++++++++++++++++++++++++++++++++++++")
+        continuar = input("\nDeseja entregar outro material? (s/n): ").lower()
+
+        if continuar != "s":
+            break
+
+    print("\n++++++++++++++++++++++++++++++++++++++")
+    print("             FIM DO PROCESSO")
+    print("++++++++++++++++++++++++++++++++++++++")

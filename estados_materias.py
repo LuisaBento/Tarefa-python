@@ -1,25 +1,9 @@
 
-print("++++++++++++++++++++++++++++++++++++++")
-print("       BEM-VINDO À LOJA BENTOS")
-print("++++++++++++++++++++++++++++++++++++++")
-
 equipamentos = {
-    1: {
-        "nome": "Samsung",
-        "disponivel": True
-    },
-    2: {
-        "nome": "Nokia",
-        "disponivel": False
-    },
-    3: {
-        "nome": "iPhone",
-        "disponivel": True
-    },
-    4: {
-        "nome": "iPad",
-        "disponivel": False
-    }
+    1: {"nome": "Samsung", "disponivel": True},
+    2: {"nome": "Nokia", "disponivel": False},
+    3: {"nome": "iPhone", "disponivel": True},
+    4: {"nome": "iPad", "disponivel": False}
 }
 
 
@@ -47,29 +31,38 @@ def consultar_estado(codigo):
         print("Estado: Não disponível")
 
 
-while True:
+def estados():
 
-    mostrar_equipamentos()
+    print("++++++++++++++++++++++++++++++++++++++")
+    print("       BEM-VINDO À LOJA BENTOS")
+    print("++++++++++++++++++++++++++++++++++++++")
 
-    codigo = input("\nDeseja ver o estado de qual equipamento? ")
+    while True:
 
-    if not codigo.isdigit():
-        print("\nCódigo inválido!")
+        mostrar_equipamentos()
 
-    elif int(codigo) not in equipamentos:
-        print("\nEquipamento não encontrado!")
+        codigo = input("\nDeseja ver o estado de qual equipamento? ")
 
-    else:
-        codigo = int(codigo)
-        consultar_estado(codigo)
+        if not codigo.isdigit():
+            print("\nCódigo inválido!")
 
-    nova_consulta = input(
-        "\nDeseja fazer uma nova consulta? (S/N): "
-    ).lower()
+        elif int(codigo) not in equipamentos:
+            print("\nEquipamento não encontrado!")
 
-    if nova_consulta != "s":
-        break
+        else:
+            codigo = int(codigo)
+            consultar_estado(codigo)
 
-print("\n++++++++++++++++++++++++++++++++++++++")
-print("             FIM DO PROCESSO")
-print("++++++++++++++++++++++++++++++++++++++")
+        nova_consulta = input(
+            "\nDeseja fazer uma nova consulta? (S/N): "
+        ).lower()
+
+        if nova_consulta != "s":
+
+            break
+
+
+    print("\n++++++++++++++++++++++++++++++++++++++")
+    print("             FIM DO PROCESSO")
+    print("++++++++++++++++++++++++++++++++++++++")
+

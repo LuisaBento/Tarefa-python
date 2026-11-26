@@ -1,36 +1,51 @@
-materiais = {
-    {'id': 1, "nome": "Samsung", "disponivel": True},
-    {'id': 2, "nome": "Nokia", "disponivel": False},
-    {'id': 3,"nome": "iPhone", "disponivel": False},
-    {'id': 4,"nome": "iPad", "disponivel": True}
-}
 
-emprestimos = [
-    {
-        "codigo": 2,
-        "utilizador": "Ana",
-        "fornecedor": "Luisa",
-        "data_entrega": "10/11/2026",
-        "estado": "Emprestado"
-    },
-    {
-        "codigo": 3,
-        "utilizador": "João",
-        "fornecedor": "Zacarias",
-        "data_entrega": "15/11/2026",
-        "estado": "Emprestado"
-    }
-]
+from emprestimos_materiais import emprestimos
+from estados_materias import estados
+from consulta_fornecedor import fornecedores_consulta
+from atrasos_materiais import atrasos
+from devolucao_materiais import devolucoes
 
 
-def devolucao_materiais():
- codigo = input("Digite o código: ")
- controle = False
- for material in materiais:
-    if codigo == material['id']:
-        controle = True
-        print('Id encontrado')
- if not controle:
-    print('O id não encontrado')
+def programa_principal():
 
-devolucao_materiais()
+    print("++++++++++++++++++++++++++++++++++++++")
+    print("        BEM-VINDO À LOJA BENTOS")
+    print("++++++++++++++++++++++++++++++++++++++")
+
+    while True:
+
+        print("\n++++++++++++ MENU PRINCIPAL ++++++++++++")
+        print("1 - Registar empréstimo")
+        print("2 - Consultar estado dos materiais")
+        print("3 - Consultar fornecedores")
+        print("4 - Consultar atrasos")
+        print("5 - Registar devolução")
+        print("0 - Sair")
+
+        opcao = input("\nEscolha uma opção: ")
+
+        if opcao == "1":
+            emprestimos()
+
+        elif opcao == "2":
+            estados()
+
+        elif opcao == "3":
+            fornecedores_consulta()
+
+        elif opcao == "4":
+            atrasos()
+
+        elif opcao == "5":
+            devolucoes()
+
+        elif opcao == "0":
+            print("\nObrigado por utilizar o sistema da Loja Bentos!")
+            break
+
+        else:
+            print("\nOpção inválida! Tente novamente.")
+
+
+if __name__ == "__main__":
+    programa_principal()

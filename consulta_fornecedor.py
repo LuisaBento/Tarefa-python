@@ -1,8 +1,4 @@
 
-print("++++++++++++++++++++++++++++++++++++++")
-print("       BEM-VINDO À LOJA BENTOS")
-print("++++++++++++++++++++++++++++++++++++++")
-
 fornecedores = {
     1: "Luisa",
     2: "Zacarias",
@@ -42,32 +38,38 @@ def consultar_emprestimos(fornecedor_encontrado):
     print("\nTotal de empréstimos autorizados:", total)
 
 
-while True:
+def fornecedores_consulta():
 
-    print("\n++++++++++ FORNECEDORES CADASTRADOS ++++++++++")
+    print("++++++++++++++++++++++++++++++++++++++")
+    print("       BEM-VINDO À LOJA BENTOS")
+    print("++++++++++++++++++++++++++++++++++++++")
 
-    for codigo, nome in fornecedores.items():
-        print(codigo, "-", nome)
+    while True:
 
-    nome_fornecedor = input(
-        "\nDigite o nome do fornecedor que deseja consultar: "
-    )
+        print("\n++++++++++ FORNECEDORES CADASTRADOS ++++++++++")
 
-    fornecedor_encontrado = procurar_fornecedor(nome_fornecedor)
+        for codigo, nome in fornecedores.items():
+            print(codigo, "-", nome)
 
-    if fornecedor_encontrado == "":
-        print("\nEste fornecedor não faz parte da equipa Bentos!")
+        nome_fornecedor = input(
+            "\nDigite o nome do fornecedor que deseja consultar: "
+        )
 
-    else:
-        consultar_emprestimos(fornecedor_encontrado)
+        fornecedor_encontrado = procurar_fornecedor(nome_fornecedor)
 
-    continuar = input(
-        "\nDeseja consultar outro fornecedor? (s/n): "
-    ).lower()
+        if fornecedor_encontrado == "":
+            print("\nEste fornecedor não faz parte da equipa Bentos!")
 
-    if continuar != "s":
-        break
+        else:
+            consultar_emprestimos(fornecedor_encontrado)
 
-print("\n++++++++++++++++++++++++++++++++++++++")
-print("             FIM DO PROCESSO")
-print("++++++++++++++++++++++++++++++++++++++")
+        continuar = input(
+            "\nDeseja consultar outro fornecedor? (s/n): "
+        ).lower()
+
+        if continuar != "s":
+            break
+
+    print("\n++++++++++++++++++++++++++++++++++++++")
+    print("             FIM DO PROCESSO")
+    print("++++++++++++++++++++++++++++++++++++++")
